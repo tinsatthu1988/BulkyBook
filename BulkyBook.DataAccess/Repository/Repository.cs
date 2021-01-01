@@ -71,15 +71,16 @@ namespace BulkyBook.DataAccess.Repository
             return query.FirstOrDefault();
         }
 
-        public void Remove(int id)
-        {
-            T entity = dbSet.Find(id);
-            Remove(entity);
-        }
+
 
         private void Remove(T entity)
         {
             dbSet.Remove(entity);
+        }
+        public void Remove(int id)
+        {
+            T entity = dbSet.Find(id);
+            Remove(entity);
         }
 
         public void RemoveRange(IEnumerable<T> entity)
