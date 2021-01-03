@@ -11,5 +11,10 @@ namespace BulkyBook.Utility
         public const string Proc_CoverType_GetAll = "ups_GetCoverTypes";
         public const string Proc_CoverType_Update = "ups_UpdateCoverTypes";
         public const string Proc_CoverType_Delete = "ups_DeleteCoverTypes";
+
+        public const string Role_User_Indi = "Individual Customer";
+        public const string Role_User_Comp = "Company Customer";
+        public const string Role_Admin = "Admin";
+        public const string Role_Employee = "Employee";
     }
 }
