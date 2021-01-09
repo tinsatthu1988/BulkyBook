@@ -4,8 +4,8 @@
 
     @foreach (var product in Model)
     {
-        <div class="col-lg-3 col-md-6">
-            <div class="row p-2">
+        <div class="col-lg-3 col-md-6 searchData">
+            <div class="row p-2" >
                 <div class="col-12 p-1" style="border:1px solid #008cba; border-radius:5px;">
                     <div class="card" style="border:0px;">
                         <img src="@product.ImageUrl" class="card-img-top rounded" />
@@ -27,7 +27,16 @@
             </div>
         </div>
     }
-
-
-
 </div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#postTitle").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $(".searchData").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}

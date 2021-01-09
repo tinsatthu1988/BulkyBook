@@ -29,7 +29,7 @@ namespace BulkyBook.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> productList = _unitOfwork.Product.GetAll(includeProperties: "Category,CoverType");
+            IEnumerable<Product>  productList = _unitOfwork.Product.GetAll(includeProperties: "Category,CoverType");
             
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
