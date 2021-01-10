@@ -20,6 +20,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="ReflectionIT.Mvc.Paging" Version="4.0.0" />
     <PackageReference Include="Stripe.net" Version="39.31.0" />
+	<PackageReference Include="Twilio" Version="5.37.1" />
   </ItemGroup>
 
   <ItemGroup>

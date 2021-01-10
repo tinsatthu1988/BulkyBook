@@ -42,14 +42,9 @@ namespace BulkyBook
             services.AddSingleton<IEmailSender, EmailSender>();
             services.Configure <EmailOptions>(Configuration);
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+            services.Configure<TwilioSettings>(Configuration.GetSection("Twilio"));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddPaging(options => {
-            //    options.ViewName = "Bootstrap4";
-            //    options.PageParameterName = "pageindex";
-            //    options.SortExpressionParameterName = "sort";
-            //    options.HtmlIndicatorDown = " <span>&darr;</span>";
-            //    options.HtmlIndicatorUp = " <span>&uarr;</span>";
-            //});
+           
             services.AddCloudscribePagination();
 
             services.AddControllersWithViews();
