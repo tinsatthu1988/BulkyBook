@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ReflectionIT.Mvc.Paging;
 using Stripe;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,14 @@ namespace BulkyBook
             services.Configure <EmailOptions>(Configuration);
             services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //services.AddPaging(options => {
+            //    options.ViewName = "Bootstrap4";
+            //    options.PageParameterName = "pageindex";
+            //    options.SortExpressionParameterName = "sort";
+            //    options.HtmlIndicatorDown = " <span>&darr;</span>";
+            //    options.HtmlIndicatorUp = " <span>&uarr;</span>";
+            //});
+            services.AddCloudscribePagination();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

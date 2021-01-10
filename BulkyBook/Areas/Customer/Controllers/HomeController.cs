@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using BulkyBook.Utility;
 using Microsoft.AspNetCore.Http;
+using ReflectionIT.Mvc.Paging;
+using cloudscribe.Pagination.Models;
 
 namespace BulkyBook.Areas.Customer.Controllers
 {
@@ -27,10 +29,23 @@ namespace BulkyBook.Areas.Customer.Controllers
             _unitOfwork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNumber = 1, int pageSize = 4)
         {
+            int ExcludeRecords = (pageSize * pageNumber) - pageSize;
+
             IEnumerable<Product>  productList = _unitOfwork.Product.GetAll(includeProperties: "Category,CoverType");
-            
+            var bookCount = productList.Count();
+
+            productList = productList.Skip(ExcludeRecords).Take(pageSize);
+
+            var result = new PagedResult<Product>
+            {
+                Data = productList.ToList(),
+                TotalItems = bookCount,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             if (claim != null)
@@ -39,7 +54,7 @@ namespace BulkyBook.Areas.Customer.Controllers
 
                 HttpContext.Session.SetInt32(SD.ssShoppingCart, count);
             }
-            return View(productList);
+            return View(result);
         }
 
         public IActionResult Details(int id)
