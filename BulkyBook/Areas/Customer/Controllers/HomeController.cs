@@ -29,12 +29,18 @@ namespace BulkyBook.Areas.Customer.Controllers
             _unitOfwork = unitOfWork;
         }
 
-        public IActionResult Index(int pageNumber = 1, int pageSize = 4)
+        public IActionResult Index(string postTitle, int pageNumber = 1, int pageSize = 4)
         {
             int ExcludeRecords = (pageSize * pageNumber) - pageSize;
 
             IEnumerable<Product>  productList = _unitOfwork.Product.GetAll(includeProperties: "Category,CoverType");
             var bookCount = productList.Count();
+
+            if (!string.IsNullOrEmpty(postTitle))
+            {
+                productList = productList.Where(b => b.Title.Contains(postTitle));
+                bookCount = productList.Count();
+            }
 
             productList = productList.Skip(ExcludeRecords).Take(pageSize);
 
@@ -56,7 +62,6 @@ namespace BulkyBook.Areas.Customer.Controllers
             }
             return View(result);
         }
-
         public IActionResult Details(int id)
         {
             var productFromDb = _unitOfwork.Product.GetFirstOrDefault(u => u.Id == id, includeProperties: "Category,CoverType");

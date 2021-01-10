@@ -81,12 +81,14 @@
                             </li>
                         }
                     <li>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search...." aria-label="Recipient's username" aria-describedby="basic-addon2" id="postTitle">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+                        <form asp-controller="Home" asp-action="Index">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search...." aria-label="Recipient's username" name="postTitle" aria-describedby="basic-addon2" id="postTitle">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </li>
                     </ul>
                 </div>
@@ -169,13 +171,13 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/e19c476714.js"></script>
     @RenderSection("Scripts", required: false)
-    @*<script>
+    <script>
             $(document).ready(function () {
                 $("#postTitle").autocomplete({
                     source: 'api/postapi/search'
                 });
             });
-        </script>*@
+        </script>
 
 </body>
 </html>
